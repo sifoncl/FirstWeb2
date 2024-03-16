@@ -7,18 +7,38 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-@WebServlet("/user")
+
+@WebServlet("/users")
 public class UserServlet extends HttpServlet {
-private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var user = userService.getUser(1);
-        resp.setContentType("text/html");
-        var writer = resp.getWriter();
-        writer.write("<html><body>");
-        writer.write("<h2>Пользовтель id"+ user.get().toString() +"</h2>");
-        writer.write("</html></body>");
-        writer.close();
+        resp.sendRedirect(req.getContextPath() + "/UserHTML.html");
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UserService userService = UserService.getInstance();
+
+        int reqId = Integer.parseInt(req.getParameter("id"));
+        String reqName = req.getParameter("name");
+        boolean isExist = userService.getUser(reqId).isPresent();
+        if (isExist){
+            UserDto user = userService.getUser(reqId).get();
+
+            boolean allowed = false;
+            if (user.getId() == reqId && user.getName().equals(reqName)) {
+                allowed = true;
+            }
+            if (allowed == true) {
+
+                resp.sendRedirect(req.getContextPath()+"/users_info"+"?id="+reqId);
+
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/WrongIdName.html");
+            }
+        }else resp.sendRedirect(req.getContextPath() + "/WrongIdName.html");
+    }
+
+
 }

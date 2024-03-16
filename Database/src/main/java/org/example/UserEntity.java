@@ -30,6 +30,9 @@ public class UserEntity {
         this.count = count;
     }
 
+    public UserEntity() {
+    }
+
     public UserEntity(int id, String name, int count) {
         this.id = id;
         this.name = name;
