@@ -38,7 +38,6 @@ public class UserService {
             db = DbManager.loadDb(path);
             System.out.println(LocalTime.now().toString() + " Нашел бд, загрузил");
             return db;
-
         } catch (IOException e) {
             System.out.println(LocalTime.now().toString() + " НЕ НАШЕЛ БД ПО ПУТИ ИНИЦИАЛИЗАЦИИ," +
                     " создаю пустую бд, с тестовыми юзерами");

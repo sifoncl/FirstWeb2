@@ -24,12 +24,9 @@ public class UserInfo extends HttpServlet {
         writer.write("<h2>Id пользователя: " + us.getUser(id).get().getId() + "</h2>");
         writer.write("<h2>Имя пользователя: " + us.getUser(id).get().getName() + "</h2>");
         writer.write("<h2>Счет пользователя: " + us.getUser(id).get().getCount() + "</h2>");
-        writer.write("<a href=\"" + req.getContextPath() + "/change_name?id=" + id + "\">Сменить имя+ </a>");
+        writer.write("<a href=\"" + req.getContextPath() + "/change_name?id=" + id + "\">Сменить имя</a>");
         writer.write("<br>");
         writer.write("<a href=\"" + req.getContextPath() + "/users_game?id=" + id + "\">Поиграем?</a>");
-
         writer.write("</html></body>");
-
-
     }
 }
