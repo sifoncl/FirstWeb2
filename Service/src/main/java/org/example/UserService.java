@@ -63,4 +63,8 @@ public class UserService {
        instance.db.getUserById(id).get().setCount(instance.getUser(id).get().getCount()+1);
     }
 
+    public void updateName(int id, String name){
+        instance.db.getUserById(id).get().setName(name);
+    }
+
 }
